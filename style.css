@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
+
+body{
+    background-image: url('images/bg.jpg');
+    background-size: cover;
+    background-position: top center;
+    color: #ffffff;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.card{
+    width: 100%;
+    max-width: 480px;
+    background: #000000d0;
+    padding: 20px 30px 40px 30px;
+    border-radius: 30px;
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 16px;
+}
+
+.search .searchBox{
+    width: 100%;
+    max-width: 320px;
+    background: #7c7c7c2b;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    margin: 5px;
+    color: #ffffffe1;
+}
+
+.search .searchBox::placeholder{
+    color: #ffffff7a;
+}
+
+.search button{
+    background: #7c7c7c2b;
+    color: #ffffffe1;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    width: 42px;
+    height: 42px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.weather{
+    display: flex;
+    margin: 15px 25px;
+    flex: 1 1;
+    
+}
+
+.weather-data{
+    margin-right: 30px;
+}
+
+.weather-data h2{
+    font-size: 40px;
+}
+
+.weather-data .date-time{
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.weather-data .day-night{
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.weather-data .temp{
+    font-size: 80px;
+    margin: -15px 0px;
+}
+
+.weather-data .feels-like{
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.weather-description{
+    width: 100%;
+}
+
+.weather-description .icon{
+    display: flex;
+    justify-content: center;
+}
+
+.weather-description .description{
+    text-transform: capitalize;
+    text-align: center;
+}
+
+/* LOADER */
+#loader{
+    border: 1.6rem solid white;
+    border-radius: 50%;
+    border-top: 1.6rem solid #56a5eb;
+    width: 12rem;
+    height: 12rem;
+    animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
