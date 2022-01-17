@@ -8,10 +8,10 @@
     <title>Weather App</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container ns">
         <div class="card">
             <div class="search"> 
-                <input type="text" placeholder="Search for a City..." class="searchBox" autofocus="false" autocomplete="false">
+                <input type="text" placeholder="Search for a City..." class="searchBox" autofocus="false" autocomplete="false" id="searchBox">
                 <button type="submit" id="search-btn">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
                         width="1.5em" xmlns="http://www.w3.org/2000/svg">
@@ -37,5 +37,14 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script async type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD529_bxqmhEWOiNh47EWQrD7MuX1od3s0&libraries=places&callback=activatePlacesSearch">
+    </script>
+    <script>
+        function activatePlacesSearch(){
+            let input = document.getElementById('searchBox');
+            let autocomplete = new google.maps.places.Autocomplete(input);
+        }
+    </script>
 </body>
 </html>
