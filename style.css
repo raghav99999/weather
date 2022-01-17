@@ -7,8 +7,17 @@
     font-family: 'Roboto Mono', monospace;
 }
 
+.ns{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 body{
-    background-image: url('bg.jpg');
+    background-image: url('images/bg.jpg');
     background-size: cover;
     background-position: top center;
     color: #ffffff;
@@ -68,7 +77,6 @@ body{
     display: flex;
     margin: 15px 25px;
     flex: 1 1;
-    
 }
 
 .weather-data{
@@ -85,7 +93,7 @@ body{
 }
 
 .weather-data .day-night{
-    margin-top: 15px;
+    margin-top: 30px;
     font-size: 12px;
 }
 
@@ -111,23 +119,106 @@ body{
 .weather-description .description{
     text-transform: capitalize;
     text-align: center;
+
 }
 
-/* LOADER */
-#loader{
-    border: 1.6rem solid white;
-    border-radius: 50%;
-    border-top: 1.6rem solid #56a5eb;
-    width: 12rem;
-    height: 12rem;
-    animation: spin 2.5s linear infinite;
+@media only screen and (max-width: 600px){
+    .card{
+        padding: 10px 15px 20px 15px;
+        width: 90%;
+    }
+
+    .search{
+        padding: 5px 10px;
+    }
+
+    .search .searchBox{
+        width: 80%;
+    }
+
+    .weather{
+        margin: 10px 18px;
+    }
+
+    .weather-data{
+        margin-right: 20px;
+    }
+
+    .weather-data h2{
+        font-size: 36px;
+    }
+
+    .weather-data .date-time{
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .weather-data .day-night{
+        margin-top: 18px;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+
+    .weather-data .temp{
+        font-size: 54px;
+    }
+
+    .weather-data .feels-like{
+        margin-top: 8px;
+        font-size: 12px;
+    }
+
+    .weather-description{
+        margin-top: -12px;
+    }
+
+    .weather-description .description{
+        font-size: 14px;
+    }
+
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+@media only screen and (max-width: 420px){
+
+    .card{
+        width: 90%;
+        border-radius: 20px;
     }
-    100%{
-        transform: rotate(360deg);
+    
+    .search{
+        margin: 10px 16px;
     }
+    
+    .search .searchBox{
+        width: 80%;
+    }
+    
+    .weather-data{
+        margin-right: 20px;
+    }
+    
+    .weather-data h2{
+        font-size: 28px;
+    }
+    
+    .weather-data .date-time{
+        font-size: 11px;
+    }
+    
+    .weather-data .day-night{
+        font-size: 11px;
+    }
+    
+    .weather-data .temp{
+        font-size: 48px;
+    }
+    
+    .weather-data .feels-like{
+        font-size: 11px;
+    }
+        
+    .weather-description .description{
+        font-size: 13px;
+    }
+
 }
