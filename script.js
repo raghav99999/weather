@@ -34,7 +34,7 @@ function displayResults(weather){
     document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?${weather.weather[0].description}')`;
 
     let city = document.querySelector('.weather-data h2');
-    city.innerText = `${weather.name},${weather.sys.country}`;
+    city.innerText = `${weather.name}, ${weather.sys.country}`;
 
     let now = new Date();
     let dateTime = document.querySelector('.weather-data .date-time');
