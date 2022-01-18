@@ -38,7 +38,7 @@ function displayResults(weather){
 
     let now = new Date();
     let dateTime = document.querySelector('.weather-data .date-time');
-    dateTime.innerText = dateBuilder(now, weather);
+    dateTime.innerText = dateTimeBuilder(now, weather);
 
     let dayNight = document.querySelector('.weather-data .day-night');
     dayNight.innerHTML = `Day ${Math.round(weather.main.temp_max)}°&uarr; &vellip; Night ${Math.round(weather.main.temp_min)}°&darr;`;
@@ -57,20 +57,16 @@ function displayResults(weather){
 
 }
 
-
-
-function dateBuilder(d, weather){
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let time = calcTime(searchBox.value , weather.timezone);
-    return `${date} ${month}, ${time}`;
+function dateTimeBuilder(_d, weather){
+    let dateTime = calcTime(searchBox.value , weather.timezone);
+    return `${dateTime}`;
 }
 
-function calcTime(place, offset) {
+function calcTime(_place, offset) {
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     d = new Date();
     utc = d.getTime() + (d.getTimezoneOffset() * 60000);
     nd = new Date(utc + (1000*offset));
-    return `${nd.getHours()}:${nd.getMinutes()}`;
+    return `${nd.getDate()} ${months[nd.getMonth()]} ${nd.getHours()}:${nd.getMinutes()}`;
 }
 
