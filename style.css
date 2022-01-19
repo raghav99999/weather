@@ -68,6 +68,7 @@ body{
 
 .front .search .searchBox::placeholder{
     color: #ffffff7a;
+    font-size: 11.5px;
 }
 
 .front .search button{
