@@ -27,7 +27,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .card{
@@ -36,6 +36,7 @@ body{
     background: #000000d5;
     padding: 20px 30px 40px 30px;
     border-radius: 30px;
+    max-height: 600px;
 }
 
 .front_display{
@@ -145,7 +146,7 @@ body{
 }
 
 .back div{
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
 .btn_more_info{

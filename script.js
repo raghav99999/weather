@@ -35,7 +35,6 @@ function displayResults(weather){
     }
 
     else{
-        console.log(weather);
         document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?${weather.weather[0].description}')`;
 
         let city = document.querySelector('.city');
@@ -93,19 +92,43 @@ function calcTime(_place, offset) {
     d = new Date();
     utc = d.getTime() + (d.getTimezoneOffset() * 60000);
     nd = new Date(utc + (1000*offset));
-    return `${nd.getDate()} ${months[nd.getMonth()]} ${nd.getHours()}:${nd.getMinutes()}`;
+
+    let strHours = nd.getHours().toString();
+    let strMinutes = nd.getMinutes().toString();
+
+    if(strHours.length==1){
+        strHours = `0${strHours}`;
+    }
+    
+    if(strMinutes.length==1){
+        strMinutes = `0${strMinutes}`;
+    }
+    
+    let convertedTime = tConvert(`${strHours}:${strMinutes}`);
+
+    return `${nd.getDate()} ${months[nd.getMonth()]} ${convertedTime}`;
 }
 
 function findWindDirection(d) {
     let directions = ['North', 'North East', 'East', 'South East', 'South', 'South West', 'West', 'North West'];
-
     d += 22.5;
-
     if (d < 0)
         d = 360 - Math.abs(d) % 360;
     else
         d = d % 360;
-
     let w = parseInt(d / 45);
     return `${directions[w]}`;
 }   
+
+
+function tConvert (time) {
+    // Check correct time format and split into components
+    time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+  
+    if (time.length > 1) { // If time format correct
+      time = time.slice (1);  // Remove full string match value
+      time[5] = +time[0] < 12 ? ' AM':' PM'; // Set AM/PM
+      time[0] = +time[0] % 12||12; // Adjust hours
+    }
+    return time.join (''); // return adjusted time or original string
+  }
