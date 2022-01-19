@@ -4,24 +4,24 @@ const weather = {
 };
 
 const searchBox = document.querySelector(".searchBox");
-searchBox.addEventListener('keypress',setQuery);
+searchBox.addEventListener('keypress',resultOnEnter);
 
 let searchBtn = document.getElementById('search-btn');
 searchBtn.addEventListener("click", resultOnClick);
 
 function resultOnClick(){
-    resultOnEnter(searchBox.value);
+    fetchData(searchBox.value);
     searchBox.value='';
 };
 
-function setQuery(event){
+function resultOnEnter(event){
     if(event.keyCode == 13){
-        resultOnEnter(searchBox.value);
+        fetchData(searchBox.value);
         searchBox.value='';
     }
 }
 
-function resultOnEnter(city){
+function fetchData(city){
     fetch(`${weather.apiBase}weather?q=${city}&units=metric&appid=${weather.apiKey}`)
     .then(weather => {
         return weather.json();
@@ -29,32 +29,58 @@ function resultOnEnter(city){
 }
 
 function displayResults(weather){
-    console.log(weather);
 
-    document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?${weather.weather[0].description}')`;
+    if(weather.cod == '404'){
+        alert("Enter Correct City");
+    }
 
-    let city = document.querySelector('.weather-data h2');
-    city.innerText = `${weather.name}, ${weather.sys.country}`;
+    else{
+        console.log(weather);
+        document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?${weather.weather[0].description}')`;
 
-    let now = new Date();
-    let dateTime = document.querySelector('.weather-data .date-time');
-    dateTime.innerText = dateTimeBuilder(now, weather);
+        let city = document.querySelector('.city');
+        city.innerHTML = `${weather.name},<br>${weather.sys.country}`;
 
-    let dayNight = document.querySelector('.weather-data .day-night');
-    dayNight.innerHTML = `Day ${Math.round(weather.main.temp_max)}°&uarr; &vellip; Night ${Math.round(weather.main.temp_min)}°&darr;`;
+        let now = new Date();
+        let dateTime = document.querySelector('.weather-data .date-time');
+        dateTime.innerText = dateTimeBuilder(now, weather);
 
-    let temp = document.querySelector('.weather-data .temp');
-    temp.innerHTML = `${Math.round(weather.main.temp)}°<span>C</span>`;
+        let dayNight = document.querySelector('.weather-data .day-night');
+        dayNight.innerHTML = `Day ${Math.round(weather.main.temp_max)}°&uarr; &vellip; Night ${Math.round(weather.main.temp_min)}°&darr;`;
 
-    let feelsLike = document.querySelector('.weather-data .feels-like');
-    feelsLike.innerText = `Feels Like ${Math.round(weather.main.feels_like)}°`;
+        let temp = document.querySelector('.weather-data .temp');
+        temp.innerHTML = `${Math.round(weather.main.temp)}°<span>C</span>`;
 
-    let icon = document.querySelector('.icon img');
-    icon.src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
+        let feelsLike = document.querySelector('.weather-data .feels-like');
+        feelsLike.innerText = `Feels Like ${Math.round(weather.main.feels_like)}°`;
 
-    let description = document.querySelector('.description');
-    description.innerText = `${weather.weather[0].description}`;
+        let icon = document.querySelector('.icon img');
+        icon.src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
 
+        let description = document.querySelector('.description');
+        description.innerText = `${weather.weather[0].description}`;
+
+        let backCity = document.querySelector('.back_city');
+        backCity.innerHTML = `${weather.name}, ${weather.sys.country}`;
+
+        let backTemp = document.querySelector('.back .back_temp');
+        backTemp.innerHTML = `${Math.round(weather.main.temp)}°<span>C</span>`;
+
+        let pressure = document.querySelector('.pressure');
+        pressure.innerText = `Pressure : ${weather.main.pressure} Bar`;
+
+        let humidity = document.querySelector('.humidity');
+        humidity.innerText = `Humidity : ${weather.main.humidity} %`;
+
+        let visibility = document.querySelector('.visibility');
+        visibility.innerText = `Visibility : ${weather.visibility/1000} Km`;
+
+        let windDirection = document.querySelector('.wind .wind_direction');
+        windDirection.innerText = `Wind Direction : From ${findWindDirection(weather.wind.deg)}`;
+
+        let windSpeed = document.querySelector('.wind .wind_speed');
+        windSpeed.innerText = `Wind Speed : ${Math.round(weather.wind.speed*4)} Km/h`;
+    }
 }
 
 function dateTimeBuilder(_d, weather){
@@ -70,3 +96,16 @@ function calcTime(_place, offset) {
     return `${nd.getDate()} ${months[nd.getMonth()]} ${nd.getHours()}:${nd.getMinutes()}`;
 }
 
+function findWindDirection(d) {
+    let directions = ['North', 'North East', 'East', 'South East', 'South', 'South West', 'West', 'North West'];
+
+    d += 22.5;
+
+    if (d < 0)
+        d = 360 - Math.abs(d) % 360;
+    else
+        d = d % 360;
+
+    let w = parseInt(d / 45);
+    return `${directions[w]}`;
+}   
